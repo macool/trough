@@ -1,6 +1,6 @@
 require "refile/s3"
 
-unless Rails.env.test?
+unless Rails.env.development? || Rails.env.test?
   aws = {
     access_key_id: ENV['S3_ACCESS_KEY_ID'],
     secret_access_key: ENV['S3_SECRET_ACCESS_KEY'],
