@@ -5,7 +5,7 @@
 .modal-body.ui-front.document-modal
   %label.col-primary="Upload a new file to replace #{@document.file_filename}"
   =form_for @document, url: replace_document_path(@document), html: { id: 'replace_document' }, remote: true  do |form|
-    =form.attachment_field :file, direct: true, presigned: true
+    =form.attachment_field :file, presigned: true
     .progress
       .progress-bar{role: "progressbar", style: "width: 0%;"}
     .modal-footer

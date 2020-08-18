@@ -163,6 +163,10 @@ a.duplicate-show {
   box-shadow: none;
 }
 
+.progress-bar {
+  display:  none; /* TODO: This is a temp fix to hide the broken progress bar*/
+}
+
 table th i.current {
   padding-left: 10px;
   

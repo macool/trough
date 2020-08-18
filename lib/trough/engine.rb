@@ -16,7 +16,7 @@ module Trough
         ::Pig::ContentPackage.class_eval do
           include Pig::Hooks
 
-          after_update :update_document_usages
+          after_save :update_document_usages
           after_destroy :unlink_document_usages
         end
       end

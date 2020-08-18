@@ -49,7 +49,7 @@ module Trough
 
     def replace
       @document = Document.find_by(slug: params[:id])
-      if @document.update(document_params)
+      if @document.update(document_params.merge(description: @document.get_description_or_default))
         flash[:notice] = "#{@document.file_filename} replaced"
       elsif @document.errors[:md5]
         @duplicate_document = Document.find_by(md5: @document.md5)

@@ -100,6 +100,14 @@ module Trough
       )
     end
 
+    def get_description_or_default
+      if description.present?
+        description
+      else
+        file_filename.gsub(/[^a-z]/i, " ")
+      end
+    end
+
     def create_usage!(content_package_id)
       document_usage = DocumentUsage.find_or_initialize_by(trough_document_id: self.id, pig_content_package_id: content_package_id)
       document_usage.active = true
