@@ -20,10 +20,10 @@ var DocumentInfoModal = (function () {
       var canDelete = !(_.any(data.document_usages, "active"));
       var delete_button = "";
       if(canDelete) {
-        delete_button = "<a class='btn btn-error pull-right' href=\"/documents/<%= data.slug %>\" data-method='delete' href=''><i class='fa fa-trash-o'></i> Delete</a>"
+        delete_button = "<a class='btn btn-error pull-right' href=\"/documents/<%= data.slug %>\" data-method='delete' href=''><i class='fa fa-trash-o'></i> Delete</a>";
       }
       else {
-        delete_button = "<strong>The document can't be deleted until all active usages have been removed</strong>"
+        delete_button = "<strong>The document can't be deleted until all active usages have been removed</strong>";
       }
 
       var compiled = _.template(
@@ -65,7 +65,7 @@ var DocumentInfoModal = (function () {
         "</thead>" +
         "<% _.each(data.document_usages, function(usage) {  %>" +
           "<tr>" +
-          "<td><%= usage.content_package.name %></td>" +
+          "<td><%= usage.unscoped_content_package.name %></td>" +
           "<td><%= usage.active %></td>" +
           "<td><%= usage.download_count %></td>" +
           "</tr>" +

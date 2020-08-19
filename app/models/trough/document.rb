@@ -3,7 +3,7 @@ module Trough
 
     has_many :document_usages, foreign_key: "trough_document_id", dependent: :destroy
 
-    validates :file, presence: true
+    validates :file, :description, presence: true
     validate :file_content_type_cant_change, on: :update
     validates :slug, :md5, uniqueness: true
 

@@ -1,5 +1,6 @@
 <% if @document.errors.empty? %>
   DocumentReplaceModal.hide();
+  location.reload();
 <% else %>
   <% if @duplicate_document.present? %>
     documentHelpers.showDuplicateDocumentAlert("<%= @duplicate_document.slug %>", function(slug){

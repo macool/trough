@@ -28,8 +28,9 @@ module Trough
     def create
       @new_document = true
       @document.uploader = current_user.full_name if current_user && current_user.full_name
-      return unless !@document.save && @document.errors[:md5]
-      @duplicate_document = Document.find_by(md5: @document.md5)
+
+      return if @document.save
+      @duplicate_document = Document.find_by(md5: @document.md5) if @document.errors[:md5]
     end
 
     def destroy
@@ -48,11 +49,8 @@ module Trough
 
     def replace
       @document = Document.find_by(slug: params[:id])
-      file_filename = @document.file_filename
-      file_params = JSON.parse(document_params[:file])
       if @document.update(document_params)
         flash[:notice] = "#{@document.file_filename} replaced"
-        @document.update_attribute(:file_filename, file_filename)
       elsif @document.errors[:md5]
         @duplicate_document = Document.find_by(md5: @document.md5)
       end
@@ -60,7 +58,7 @@ module Trough
 
     def info
       @document = Document.find_by(slug: params[:id])
-      json = @document.as_json(include: { document_usages: { include: { content_package: { only: [:name] } } } }, methods: :uploaded_on)
+      json = @document.as_json(include: { document_usages: { include: { unscoped_content_package: { only: [:name] } } } }, methods: :uploaded_on)
       json["share_url"] = trough.document_url(@document)
       render json: json.to_json
     end

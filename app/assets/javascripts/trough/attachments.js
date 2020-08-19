@@ -30,4 +30,15 @@ var attachments = (function () {
    return false;
  });
 
+ $(document).ready(function() {
+   $('form#new_document').on('ajax:before', function(event, xhr, status, error) {
+     if($('#document_description_input textarea').val() === '') {
+       $('#document_description_input').addClass('error');
+       $('#document_description_input').find('.form-wrapper').append("<span class='help-block'>description can't be blank</span>");
+       $('#document_submit_action').removeClass('disabled').val("Upload file");
+       return false;
+     }
+   });
+ });
+
 })();
